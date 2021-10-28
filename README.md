@@ -1,10 +1,18 @@
-# iasa-ip
+# wsa-helper
 
-<img alt="logo" src="./res/logo.png" width="100">  
+<img alt="logo" src="./res/img/logo.png" width="100">
 
-[![CI](https://github.com/IASA-Null/iasa-ip/actions/workflows/windows.yml/badge.svg)](https://github.com/IASA-Null/iasa-ip/actions/workflows/windows.yml)
+Tool for WSA inpired from Emulators.
 
+## Supported Features
 
-인천과학예술영재학교 학생들을 위한 IP 변경기에요!
+ * Always on top
+ * Screenshot
 
-TS + Svelte + Electron으로 만들었어요!
+## TODO
+
+ * Recording
+ * Scroll Screenshot(For long screenshots)
+ * Keymapper
+ * Macro
+ * APK Installer
