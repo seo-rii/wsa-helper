@@ -1,0 +1,8 @@
+build/**/*
+build_js/**/*
+node_modules/**/*
+build_tool/RH.ini
+dist/**/*
+pkg-cache/**/*
+.idea/**/*
+res/IP_SERVICE??
