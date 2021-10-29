@@ -5,7 +5,7 @@ import os from 'os'
 import {Action} from "./actions";
 import {alwaysOnTop, screenshot, apkInstall} from "./action";
 
-let toolbarWindow, lastFocusedWSAClient;
+let toolbarWindow, lastFocusedWSAClient, toolbarWidth = 100, lostFocusTime;
 
 function getNativeWindowHandle_Int(win) {
     let hbuf = win.getNativeWindowHandle()
@@ -26,12 +26,15 @@ function init() {
             lastFocusedWSAClient = currentWindow
             const currentWindowBound = currentWindow.getBounds()
             toolbarWindow.setPosition(((currentWindowBound.x ?? 0) + (currentWindowBound.width ?? 0)) + 10, currentWindowBound.y)
-            toolbarWindow.setSize(100, (currentWindowBound.height ?? 0) - 3)
+            toolbarWindow.setSize(toolbarWidth, (currentWindowBound.height ?? 0) - 3)
             toolbarWindow.showInactive()
+            lostFocusTime = 0
         } else if (currentWindow.id === windowHandle) {
             toolbarWindow.showInactive()
+            lostFocusTime = 0
         } else {
-            toolbarWindow.hide()
+            if (!lostFocusTime) lostFocusTime = Date.now()
+            if (Date.now() - lostFocusTime > 100) toolbarWindow.hide()
         }
     }, 1)
 }
@@ -52,3 +55,7 @@ ipcMain.on("toolbarAction", (e, data: { action: Action, data?: any }) => {
             break
     }
 });
+
+ipcMain.on('setToolbarWidth', (e, width: number) => {
+    toolbarWidth = width
+})

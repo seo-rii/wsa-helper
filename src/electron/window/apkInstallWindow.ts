@@ -2,7 +2,7 @@ import {BrowserWindow} from "electron-acrylic-window";
 import path from "path";
 import url from "url";
 
-export default function(dev = false) {
+export default function (dev = false) {
     let win;
     win = new BrowserWindow({
         width: 400,
@@ -22,6 +22,5 @@ export default function(dev = false) {
     }));
     win.setAlwaysOnTop(true, 'floating');
     if (dev) win.webContents.openDevTools({mode: "detach"});
-
     return win
 }

@@ -1,55 +1,74 @@
 <script lang="ts">
-    import IconButton, {Icon} from '@smui/icon-button'
-    import Tooltip, {Wrapper} from '@smui/tooltip'
     import {Action} from "../../electron/actions"
     import '../common/preload'
+    import PAGE from './pages'
 
-    let alwaysOnTop = false
+    import Main from './pages/main.svelte'
+    import Capture from './pages/capture.svelte'
+
+    const PageAnimation = {
+        ENTER: 'ENTER',
+        EXIT: 'EXIT',
+        NONE: 'NONE'
+    }
+
+    let alwaysOnTop = false, width = 100, page: PAGE = PAGE.MAIN, pageAnim = PageAnimation.NONE
+
+    $: {
+        switch (page) {
+            case PAGE.MAIN:
+                width = 100
+                pageAnim = PageAnimation.EXIT
+                break
+            case PAGE.CAPTURE:
+                width = 300
+                pageAnim = PageAnimation.ENTER
+                break
+        }
+    }
 
     $: {
         window.electron.toolbar.toolbarAction(Action.ALWAYSONTOP, alwaysOnTop)
+        window.electron.toolbar.setToolbarWidth(width)
     }
 </script>
 
 <style lang="scss">
-  .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    padding: 20px;
+  .fadeIn {
+    animation: fadeIn 0.2s cubic-bezier(0, .75, .25, 1) forwards;
   }
 
-  .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  .fadeOut {
+    animation: fadeOut 0.2s cubic-bezier(0, .75, .25, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      margin-left: 30px;
+    }
+    100% {
+      opacity: 1;
+      margin-left: 0;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 0;
+      margin-left: -30px;
+    }
+    100% {
+      opacity: 1;
+      margin-left: 0;
+    }
   }
 </style>
 
-<div class="main">
-    <Wrapper>
-        <IconButton class="material-icons-outlined" bind:pressed={alwaysOnTop} toggle>
-            <Icon class="material-icons" on>push_pin</Icon>
-            <Icon class="material-icons-outlined">push_pin</Icon>
-        </IconButton>
-        <Tooltip>Always on Top</Tooltip>
-    </Wrapper>
-    <Wrapper>
-        <div class="row">
-            <IconButton class="material-icons" on:click={()=>window.electron.toolbar.toolbarAction(Action.SCREENSHOT)}>
-                screenshot
-            </IconButton>
-            <Icon class="material-icons">arrow_right</Icon>
-        </div>
-        <Tooltip>Take Screenshot</Tooltip>
-    </Wrapper>
-    <Wrapper>
-        <IconButton class="material-icons" on:click={()=>window.electron.toolbar.toolbarAction(Action.APKINSTALL)}>
-            install_mobile
-        </IconButton>
-        <Tooltip>Install APK</Tooltip>
-    </Wrapper>
-</div>
-
+<main class:fadeIn={pageAnim===PageAnimation.ENTER} class:fadeOut={pageAnim===PageAnimation.EXIT}>
+    {#if page === PAGE.MAIN}
+        <Main bind:alwaysOnTop bind:page/>
+    {:else if page === PAGE.CAPTURE}
+        <Capture bind:page/>
+    {/if}
+</main>

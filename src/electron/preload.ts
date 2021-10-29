@@ -7,6 +7,7 @@ contextBridge.exposeInMainWorld(
     {
         toolbar: {
             toolbarAction: (action: Action, data?: any) => ipcRenderer.send('toolbarAction', {action, data}),
+            setToolbarWidth: (width: number) => ipcRenderer.send('setToolbarWidth', width),
         },
         apkInstall: {
             onMessage: (callback: (event, stage: number) => void) => {

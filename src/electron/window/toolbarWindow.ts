@@ -22,6 +22,8 @@ export default function createToolbarWindow(dev = false) {
     }));
     win.setAlwaysOnTop(true, 'floating');
     if (dev) win.webContents.openDevTools({mode: "detach"});
-
+    win.on('close', e => {
+        e.preventDefault()
+    })
     return win
 }
