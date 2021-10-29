@@ -73,4 +73,10 @@
         </IconButton>
         <Tooltip>Install APK</Tooltip>
     </Wrapper>
+    <Wrapper>
+        <IconButton class="material-icons" on:click={()=>page=PAGE.OPENSETTING}>
+            settings
+        </IconButton>
+        <Tooltip>Setting</Tooltip>
+    </Wrapper>
 </main>

@@ -4,8 +4,10 @@ import {windowManager} from "node-window-manager"
 import os from 'os'
 import {Action} from "./actions";
 import {alwaysOnTop, screenshot, apkInstall} from "./action";
+import {exec} from 'child_process'
+import * as path from "path";
 
-let toolbarWindow, lastFocusedWSAClient, toolbarWidth = 100, lostFocusTime;
+let toolbarWindow, lastFocusedWSAClient, toolbarWidth = 100, lostFocusTime, wsaPath;
 
 function getNativeWindowHandle_Int(win) {
     let hbuf = win.getNativeWindowHandle()
@@ -23,6 +25,7 @@ function init() {
     setInterval(() => {
         const currentWindow = windowManager.getActiveWindow();
         if (currentWindow.path.split('\\').slice(-1)[0] === 'WsaClient.exe') {
+            wsaPath = currentWindow.path
             lastFocusedWSAClient = currentWindow
             const currentWindowBound = currentWindow.getBounds()
             toolbarWindow.setPosition(((currentWindowBound.x ?? 0) + (currentWindowBound.width ?? 0)) + 10, currentWindowBound.y)
@@ -52,6 +55,9 @@ ipcMain.on("toolbarAction", (e, data: { action: Action, data?: any }) => {
             break
         case Action.APKINSTALL:
             apkInstall()
+            break
+        case Action.OPENWSASETTING:
+            exec('explorer.exe shell:appsFolder\\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe!MicrosoftCorporationII.WindowsSubsystemForAndroid')
             break
     }
 });

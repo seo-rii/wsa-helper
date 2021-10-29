@@ -5,6 +5,7 @@
 
     import Main from './pages/main.svelte'
     import Capture from './pages/capture.svelte'
+    import Setting from './pages/setting.svelte'
 
     const PageAnimation = {
         ENTER: 'ENTER',
@@ -21,6 +22,10 @@
                 pageAnim = PageAnimation.EXIT
                 break
             case PAGE.CAPTURE:
+                width = 300
+                pageAnim = PageAnimation.ENTER
+                break
+            case PAGE.OPENSETTING:
                 width = 300
                 pageAnim = PageAnimation.ENTER
                 break
@@ -70,5 +75,7 @@
         <Main bind:alwaysOnTop bind:page/>
     {:else if page === PAGE.CAPTURE}
         <Capture bind:page/>
+    {:else if page === PAGE.OPENSETTING}
+        <Setting bind:page/>
     {/if}
 </main>

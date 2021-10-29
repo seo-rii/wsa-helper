@@ -1,6 +1,7 @@
 const PAGE = {
     MAIN: 'MAIN',
-    CAPTURE: 'CAPTURE'
+    CAPTURE: 'CAPTURE',
+    OPENSETTING: 'OPENSETTING'
 }
 
 export default PAGE
