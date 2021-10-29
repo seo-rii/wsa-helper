@@ -3,7 +3,7 @@ import {app, ipcMain} from "electron";
 import {windowManager} from "node-window-manager"
 import os from 'os'
 import {Action} from "./actions";
-import {alwaysOnTop, screenshot} from "./action";
+import {alwaysOnTop, screenshot, apkInstall} from "./action";
 
 let toolbarWindow, lastFocusedWSAClient;
 
@@ -38,14 +38,17 @@ function init() {
 
 app.on('ready', init);
 
-ipcMain.on("toolbarAction", (e, data: { action: Action } | any) => {
+ipcMain.on("toolbarAction", (e, data: { action: Action, data?: any }) => {
     if (!lastFocusedWSAClient) return
     switch (data.action) {
         case Action.ALWAYSONTOP:
-            alwaysOnTop(lastFocusedWSAClient, data.set)
+            alwaysOnTop(lastFocusedWSAClient, data.data)
             break
         case Action.SCREENSHOT:
             screenshot(lastFocusedWSAClient)
+            break
+        case Action.APKINSTALL:
+            apkInstall()
             break
     }
 });

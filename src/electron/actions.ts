@@ -1,4 +1,5 @@
 export enum Action {
     ALWAYSONTOP,
-    SCREENSHOT
+    SCREENSHOT,
+    APKINSTALL,
 }

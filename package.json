@@ -77,6 +77,7 @@
     "@smui/button": "^4.2.0",
     "@smui/circular-progress": "^4.2.0",
     "@smui/icon-button": "^4.2.0",
+    "@smui/linear-progress": "^5.0.0-beta.7",
     "@smui/list": "^4.2.0",
     "@smui/menu": "^4.2.0",
     "@smui/menu-surface": "^4.2.0",

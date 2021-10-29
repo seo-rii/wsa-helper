@@ -88,5 +88,6 @@ export default [
     nodeConfig('electron/preload'),
 
     svelteConfig('main'),
-    svelteConfig('toolbar')
+    svelteConfig('toolbar'),
+    svelteConfig('apkInstall')
 ];

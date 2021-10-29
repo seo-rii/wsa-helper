@@ -9,4 +9,5 @@ export default function createNotify(title: string, body: string, icon = 'logo',
     });
     if (cb) notification.on('click', cb)
     notification.show();
+    return notification
 }

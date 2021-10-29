@@ -8,6 +8,7 @@ Tool for WSA inpired from Emulators.
 
  * Always on top
  * Screenshot
+ * APK Installer
 
 ## TODO
 
@@ -15,4 +16,3 @@ Tool for WSA inpired from Emulators.
  * Scroll Screenshot(For long screenshots)
  * Keymapper
  * Macro
- * APK Installer

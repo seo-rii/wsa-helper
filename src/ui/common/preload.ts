@@ -1,11 +1,14 @@
 import {Action} from "../../electron/actions"
 
-export {};
+interface Bridge {
+    toolbar: { toolbarAction: (action: Action, data?: any) => void }
+    apkInstall: { onMessage: (callback: (event, stage: number) => void) => void }
+}
 
 declare global {
     interface Window {
-        electron: {
-            toolbarAction: (action: Action, set: boolean) => void
-        }
+        electron: Bridge
     }
 }
+
+export default Bridge

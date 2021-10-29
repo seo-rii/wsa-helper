@@ -7,7 +7,7 @@
     let alwaysOnTop = false
 
     $: {
-        window.electron.toolbarAction(Action.ALWAYSONTOP, alwaysOnTop)
+        window.electron.toolbar.toolbarAction(Action.ALWAYSONTOP, alwaysOnTop)
     }
 </script>
 
@@ -19,6 +19,7 @@
     height: 100vh;
     padding: 20px;
   }
+
   .row {
     display: flex;
     flex-direction: row;
@@ -37,12 +38,18 @@
     </Wrapper>
     <Wrapper>
         <div class="row">
-            <IconButton class="material-icons" on:click={()=>window.electron.toolbarAction(Action.SCREENSHOT)}>
+            <IconButton class="material-icons" on:click={()=>window.electron.toolbar.toolbarAction(Action.SCREENSHOT)}>
                 screenshot
             </IconButton>
             <Icon class="material-icons">arrow_right</Icon>
         </div>
         <Tooltip>Take Screenshot</Tooltip>
+    </Wrapper>
+    <Wrapper>
+        <IconButton class="material-icons" on:click={()=>window.electron.toolbar.toolbarAction(Action.APKINSTALL)}>
+            install_mobile
+        </IconButton>
+        <Tooltip>Install APK</Tooltip>
     </Wrapper>
 </div>
 
