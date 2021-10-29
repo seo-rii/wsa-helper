@@ -20,7 +20,7 @@
     align-items: center;
     height: 100vh;
     padding: 20px;
-    width: calc(var(--width) - 40px);
+    width: 60px;
 
     & > * {
       margin: 5px;
