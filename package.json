@@ -2,15 +2,15 @@
   "name": "wsa-helper",
   "version": "0.0.1",
   "description": "Control Helper for WSA",
-  "main": "build/electron/main.js",
+  "main": "build_js/electron/main.js",
   "author": "Seo-RIi <studioSeoRii@gmail.com>",
   "license": "MIT",
   "scripts": {
     "build": "yarn run build:ts && yarn run build:electron",
     "deploy": "yarn run build:ts && yarn run build:electron:publish",
     "build:ts": "rollup -c",
-    "build:electron": "electron-builder -c.extraMetadata.main=build/electron/main.js",
-    "build:electron:publish": "electron-builder -c.extraMetadata.main=build/electron/main.js -p always",
+    "build:electron": "electron-builder -c.extraMetadata.main=build_js/electron/main.js",
+    "build:electron:publish": "electron-builder -c.extraMetadata.main=build_js/electron/main.js -p always",
     "build:native": "node-gyp rebuild",
     "dev": "rollup -c -w",
     "run": "electron build_js/electron/main.js",
@@ -27,6 +27,7 @@
     "win": {
       "files": [
         "./build/**/*",
+        "./build_js/**/*",
         "./node_modules/**/*",
         "./res/**/*",
         "./src/**/*"
